@@ -1088,7 +1088,7 @@ void parse_file_args(char **f_args, int f_count, char *os_attr, struct list_node
 	struct list_node *this_file;
 	struct a_file *file_data;
 	int fname_len;
-	bool is_pe = false;
+	bool is_pe;
 	
 	*file = NULL;
 	
@@ -1123,6 +1123,8 @@ void parse_file_args(char **f_args, int f_count, char *os_attr, struct list_node
 			
 			is_pe = true;
 		}
+		else
+			is_pe = false;
 		
 		this_file = malloc(sizeof(struct list_node) + sizeof(struct a_file));
 		if (this_file == NULL) {
@@ -1164,10 +1166,6 @@ void parse_file_args(char **f_args, int f_count, char *os_attr, struct list_node
 	/*create new struct and chain it with previouse
 	//reverse order is based on observed cat files */ \
 	*hwid = malloc(sizeof(struct list_node) + sizeof(struct an_attribute_data)); \
-	if (*hwid == NULL) \
-	{ \
-	    fatal(ERR_OOM); \
-	} \
 	if (*hwid == NULL) \
 	{ \
 		fatal(ERR_OOM); \
